@@ -1,0 +1,7 @@
+{% if article_list %}
+    <url>
+        {% for article in article_list %}
+            <li><a href="/stories/{{ article.image_count }}">{{ article.title }}</a></li>
+        {% endfor %}
+    </url>
+{% endif %}
