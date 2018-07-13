@@ -1,7 +1,36 @@
-{% if article_list %}
-    <url>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'stories/story.css' %}"/>
+</head>
+<body>
+<div id="content">
+    {% if article_list %}
         {% for article in article_list %}
-            <li><a href="/stories/{{ article.image_count }}">{{ article.title }}</a></li>
+            <article class="article">
+                <header>
+                    <a class="category">{{ article.category }}</a>
+                    <h2><a href="{% url 'stories:post' article.articleId %}">{{ article.title }}</a></h2>
+                    <small><span class="glyphicon glyphicon-picture"></span>{{ article.image_count }}</small>
+                </header>
+                <p class="text-time">{{ article.author }} 发布于 {{ article.pub_date|timesince }}</p>
+                <p class="summary">{{ article.summary }}</p>
+                <span class="views">标签：
+                    {% for tag in article.tags.all %}
+                        <a href="{% url 'stories:tag' tag.tagId %}">{{ tag.tag }}</a>
+                        {% if not forloop.last %}
+                            /
+                        {% endif %}
+                    {% endfor %}
+                </span>
+            </article>
         {% endfor %}
-    </url>
-{% endif %}
+    {% endif %}
+</div>
+</body>
+</html>
+
+

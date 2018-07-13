@@ -19,16 +19,19 @@ summary = ['爱娃.布劳恩是德国慕尼黑人。1929年，17岁的她在海�
 category = ['视频', '文摘', '文摘', '优惠', '文摘']
 author = ['梁萧', '梁萧', '梁萧', '梁萧', '梁萧']
 image_count = [1, 4, 2, 140, 1]
-tag = ['希特勒', '车加塞 / 车祸', '流星花园 / 道明寺', '', '微语录 / 段子']
+
+relations = {1: ['希特勒'], 2: ['车加塞', '车祸'], 3: ['流星花园' '道明寺'], 4: ['微语录'], 5: ['段子']}
+
+tags = ['希特勒', '车加塞', '车祸', '流星花园' '道明寺', '微语录', '段子']
 
 cnx = mysql.connector.connect(user='root', password='cute', database='storysite')
 cursor = cnx.cursor()
 
 
 def add_article():
-    add_entry = ('INSERT INTO article (title, summary, category, author, image_count, tag, pub_date) VALUES (%s, %s, %s, %s, %s, %s, %s)')
+    add_entry = ('INSERT INTO article (title, summary, category, author, image_count, pub_date) VALUES (%s, %s, %s, %s, %s, %s)')
     for i in range(5):
-        entry = (titles[i], summary[i], category[i], author[i], image_count[i], tag[i], datetime.now())
+        entry = (titles[i], summary[i], category[i], author[i], image_count[i], datetime.now())
         cursor.execute(add_entry, entry)
         print 'insert finish:%d' % i
 
@@ -38,6 +41,34 @@ def add_article():
     cnx.close()
 
 
+def add_tag():
+    sql = "INSERT INTO tag (tag) VALUES (%(tag)s)"
+    for i in range(len(tags)):
+        cursor.execute(sql, {'tag': tags[i]})
+        print 'insert:%s' % tags[i]
+
+    cnx.commit()
+    cursor.close()
+
+
+def bindTags():
+    cursor.execute("SELECT articleId FROM article")
+    results = cursor.fetchall()
+
+    sql = ('INSERT INTO article_tags (article_id, tag_id) VALUES (%s, %s)')
+
+    for row in results:
+        articleId = row[0]
+        tags = relations[articleId]
+
+        for t in tags:
+            cursor.execute(sql, (articleId, t))
+            print 'insert %s' % t
+
+    cnx.commit()
+    cursor.close()
+
+
 if __name__ == '__main__':
-    add_article()
+    bindTags()
 
