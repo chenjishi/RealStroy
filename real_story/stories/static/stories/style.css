@@ -1,5 +1,7 @@
 body {
     color: #444;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 header {
@@ -42,6 +44,27 @@ header {
     background-image: url("images/logo.png");
     background-repeat: no-repeat;
     background-position: 50% 50%;
+}
+
+#sidebar {
+    width: 300px;
+    position: fixed;
+    top: 20px;
+    right: 0px;
+}
+
+#sidebar h3 {
+    border-bottom: 2px solid #eeeeee;
+    padding-top: 2px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin: 20px 0;
 }
 
 h2 {

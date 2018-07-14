@@ -11,7 +11,7 @@
 <div>
     <header id="header">
         <div id="logo">
-            <a href="index.html"></a>
+            <a href="{% url 'stories:index' %}"></a>
         </div>
         <ul>
             <li><a>关于</a></li>
@@ -21,11 +21,20 @@
         </ul>
     </header>
     <section id="content">
-        {% block content %}
-            <p>您好</p>
-        {% endblock %}
+        {% block content %}{% endblock %}
     </section>
+    <aside id="sidebar">
+        <div>
+            <h3><strong>随机文章</strong></h3>
+        </div>
+        <ul>
+            {% if article_list %}
+                {% for a in article_list %}
+                    <li>{{ a.summary|slice:":20" }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </aside>
 </div>
-
 </body>
 </html>
