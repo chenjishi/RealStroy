@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}我的网站{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'stories/style.css' %}"/>
+</head>
+<body>
+<div>
+    <header id="header">
+        <div id="logo">
+            <a href="index.html"></a>
+        </div>
+        <ul>
+            <li><a>关于</a></li>
+            <li><a>联系</a></li>
+            <li><a>每日博海拾贝</a></li>
+            <li><a>萝卜网关闭公公告</a></li>
+        </ul>
+    </header>
+    <section id="content">
+        {% block content %}
+            <p>您好</p>
+        {% endblock %}
+    </section>
+</div>
+
+</body>
+</html>

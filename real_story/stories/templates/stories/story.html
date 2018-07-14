@@ -1,26 +1,18 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ article.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{% static 'stories/story.css' %}"/>
-</head>
-<body>
-<div id="content">
-    <header class="article_header">
+{% extends "./base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+    <header id="article_header">
         <h1>{{ article.title }}</h1>
         <ul class="article_meta">
             <li>{{ article.author }} 发布于 {{ article.pub_date|timesince }}</li>
             <li>分类：<a href="index.html">{{ article.category }}</a></li>
         </ul>
     </header>
-    <article id="article_content">
+    <article id="article_detail">
         {% autoescape off %}
             {{ story.content }}
         {% endautoescape %}
     </article>
-</div>
-</body>
-</html>
+{% endblock %}

@@ -1,13 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'stories/story.css' %}"/>
-</head>
-<body>
-<div id="content">
+{% extends "./base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block content %}
     {% if article_list %}
         {% for article in article_list %}
             <article class="article">
@@ -29,8 +24,4 @@
             </article>
         {% endfor %}
     {% endif %}
-</div>
-</body>
-</html>
-
-
+{% endblock %}

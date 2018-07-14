@@ -8,6 +8,15 @@ class Story(models.Model):
     storyId = models.AutoField(primary_key=True)
     content = models.TextField()
 
+    def __str__(self):
+        if not self.content:
+            return 'empty'
+        else:
+            if len(self.content) <= 30:
+                return self.content
+            else:
+                return self.content[:30]
+
     class Meta:
         db_table = 'story'
 
