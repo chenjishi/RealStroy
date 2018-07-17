@@ -1,0 +1,11 @@
+{% extends "./base.html" %}
+
+{% block title %}创建故事{% endblock %}
+
+{% block content %}
+    <form id="form_sheet" action="{% url 'stories:create_story' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}
