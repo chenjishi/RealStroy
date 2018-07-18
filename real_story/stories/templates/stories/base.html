@@ -9,32 +9,17 @@
 </head>
 <body>
 <div>
-    <header id="header">
-        <div id="logo">
-            <a href="{% url 'stories:index' %}"></a>
+    <div id="banner_header"></div>
+    <div id="container">
+        <div id="middle_pane">
+            {% block content %}{% endblock %}
         </div>
-        <ul>
-            <li><a>关于</a></li>
-            <li><a>联系</a></li>
-            <li><a>每日博海拾贝</a></li>
-            <li><a>萝卜网关闭公公告</a></li>
-        </ul>
-    </header>
-    <section id="content">
-        {% block content %}{% endblock %}
-    </section>
-    <aside id="sidebar">
-        <div>
-            <h3><strong>随机文章</strong></h3>
+        <div id="left_pane">
         </div>
-        <ul>
-            {% if article_list %}
-                {% for a in article_list %}
-                    <li>{{ a.summary|slice:":20" }}</li>
-                {% endfor %}
-            {% endif %}
-        </ul>
-    </aside>
+        <div id="right_pane">
+            {% block sidebar %}{% endblock %}
+        </div>
+    </div>
 </div>
 </body>
 </html>
