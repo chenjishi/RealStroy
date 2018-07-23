@@ -27,8 +27,8 @@
 {% endblock %}
 
 {% block sidebar %}
-    <div id="write_story">
+    <div class="card">
         <p>在这里，希望能留下你的故事，交到知心的朋友，分享你的人生，每个人的人生都是一场精彩的旅程!</p>
-        <div><a href="{% url 'stories:submit' %}">写故事</a></div>
+        <div><a id="write_story" class="button" href="{% url 'stories:submit' %}">写故事</a></div>
     </div>
 {% endblock %}

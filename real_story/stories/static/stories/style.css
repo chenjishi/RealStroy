@@ -20,16 +20,18 @@ body {
     padding: 68px 312px;
 }
 
+#content_wrap {
+    padding: 20px 24px;
+}
+
 #middle_pane {
     background-color: white;
     width: 100%;
-    height: 100%;
     float: left;
 }
 
 #left_pane {
     width: 312px;
-    height: 100%;
     float: left;
     margin-left: -100%;
     position: relative;
@@ -38,14 +40,13 @@ body {
 
 #right_pane {
     width: 312px;
-    height: 100%;
     margin-left: -312px;
     float: left;
     position: relative;
     right: -312px;
 }
 
-#write_story {
+.card {
     background-color: white;
     padding: 20px 24px;
     margin: 0px 24px;
@@ -58,7 +59,8 @@ body {
     border-style: solid;
 }
 
-#write_story a {
+.button {
+    box-sizing: border-box;
     background-color: #b4b8c1;
     color: white;
     width: 100%;
@@ -76,11 +78,42 @@ header {
     margin: 0 0 10px 0;
 }
 
-#title_area {
-    padding: 8px 16px;
+.title_area {
+    box-sizing: border-box;
+    width: 100%;
+    height: 39px;
+    padding: 0;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(237, 239, 241);
+    border-radius: 4px;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    color: rgb(28, 28, 28);
+    resize: none;
+    margin-bottom: 8px;
+}
+
+.content_area {
+    box-sizing: border-box;
+    width: 100%;
+    height: 39px;
+    padding: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(237, 239, 241);
+    border-radius: 4px;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    color: rgb(28, 28, 28);
+    resize: none;
+    min-height: 244px;
+}
+
+#edit_zone p {
+    display: block;
+    margin: 0;
+    padding: 0;
 }
 
 h2 {

@@ -1,11 +1,21 @@
 {% extends "./base.html" %}
 
-{% block title %}创建故事{% endblock %}
+{% block title %}写故事{% endblock %}
 
 {% block content %}
-    <form id="form_sheet" action="{% url 'stories:create_story' %}" method="post">
+    <form id="edit_zone" action="{% url 'stories:create_story' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Submit"/>
+        <input style="width: 64px; padding: 0; margin: 8px 0 0 auto" class="button" id="button_submit" type="submit" value="发布"/>
     </form>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="card">
+        <p>规则1</p>
+        <p>规则2</p>
+        <p>规则3</p>
+        <p>规则4</p>
+        <p>规则5</p>
+    </div>
 {% endblock %}

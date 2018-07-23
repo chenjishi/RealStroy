@@ -5,5 +5,9 @@ from django import forms
 
 
 class StoryForm(forms.Form):
-    title = forms.CharField(max_length=300, widget=forms.Textarea(attrs={'class': 'title_area'}))
-    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'content_area'}))
+    title = forms.CharField(label='', max_length=300, widget=forms.Textarea(attrs={'class': 'title_area',
+                                                                                   'placeholder': '标题',
+                                                                                   'rows': 1}))
+    content = forms.CharField(label='', widget=forms.Textarea(attrs={'class': 'content_area',
+                                                                     'placeholder': '内容',
+                                                                     'rows': 10}))
