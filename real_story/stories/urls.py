@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^post/(\d+)/$', views.post, name='post'),
     url(r'^submit/$', views.submit, name='submit'),
     url(r'^create_story/$', views.create_story, name='create_story'),
-    url(r'^sign_up/$', views.sign_up, name='sign_up'),
-    url(r'^auth/$', views.user_auth, name='auth')
+    url(r'^sign_in/$', views.sign_in, name='sign_in'),
+    url(r'^login_in/$', views.login_in, name='login_in'),
 ]

@@ -1,0 +1,22 @@
+{% extends "./base.html" %}
+
+{% block title %}登录{% endblock %}
+
+{% block content %}
+    <form id="edit_zone" action="{% url 'stories:login_in' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <p>{{ field.label }}</p>
+            <div>{{ field }}</div>
+            {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        {% if errorMsg %}
+            <p style="color: red">{{ errorMsg }}</p>
+        {% endif %}
+        <input style="width: 64px; padding: 0; margin: 12px 0 0 0" class="button" id="button_submit" type="submit"
+               value="登录"/>
+    </form>
+    <p>没有账号？<a href="{% url 'stories:sign_in' %}">马上注册</a></p>
+{% endblock %}

@@ -4,22 +4,13 @@ from __future__ import unicode_literals
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.shortcuts import redirect
 
-from .models import Article, Story
-from .forms import StoryForm, UserForm
+from .models import Article, Story, User, UserManager
+from .forms import StoryForm, CustomUserCreationForm, UserLoginForm
 from datetime import datetime
-
-
-def sign_up(request):
-    if request.user.is_authenticated:
-        logout(request)
-        return redirect('/stories/')
-    else:
-        template = loader.get_template('stories/sign_up.html')
-        context = {'form': UserForm(), 'login': False}
-        return HttpResponse(template.render(context, request))
+from django.shortcuts import render
+from django.core.exceptions import ValidationError
 
 
 def index(request):
@@ -81,17 +72,40 @@ def create_story(request):
     return HttpResponse(template.render(context, request))
 
 
-def user_auth(request):
+def login_in(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = UserLoginForm(request.POST)
         if form.is_valid():
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            user = authenticate(email=form.cleaned_data['email'],
+                                password=form.cleaned_data['password'])
+            print 'user', user
             if user is not None:
                 login(request, user)
                 return redirect('/stories/')
             else:
-                new_user = User.objects.create_user(form.cleaned_data['username'],
-                                                   form.cleaned_data['email'],
-                                                   form.cleaned_data['password'])
-                new_user.save()
-                return redirect('/stories/sign_up/')
+                return render(request, 'stories/login.html', {'form': form, 'errorMsg': '密码错误!'})
+    else:
+        if request.user.is_authenticated:
+            logout(request)
+            return redirect('/stories/')
+        else:
+            form = UserLoginForm()
+
+    return render(request, 'stories/login.html', {'form': form, 'login': False})
+
+
+def sign_in(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = authenticate(email=form.cleaned_data['email'],
+                                password=form.cleaned_data['password'])
+
+            if user is not None:
+                login(request, user)
+                return redirect('/stories/')
+    else:
+        form = CustomUserCreationForm()
+
+    return render(request, 'stories/sign_in.html', {'form': form, 'login': False})

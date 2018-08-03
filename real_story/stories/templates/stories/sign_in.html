@@ -3,11 +3,14 @@
 {% block title %}注册{% endblock %}
 
 {% block content %}
-    <form id="edit_zone" action="{% url 'stories:auth' %}" method="post">
+    <form id="edit_zone" action="{% url 'stories:sign_in' %}" method="post">
         {% csrf_token %}
         {% for field in form %}
             <p>{{ field.label }}</p>
             <div>{{ field }}</div>
+            {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
         {% endfor %}
         <input style="width: 64px; padding: 0; margin: 12px 0 0 0" class="button" id="button_submit" type="submit"
                value="注册"/>
