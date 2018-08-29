@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'storysite',
-        'USER': 'root',
-        'PASSWORD': 'cute'
+        'USER': '*******',
+        'PASSWORD': '******'
     }
 }
 
